@@ -1,0 +1,4 @@
+'view custom one page':
+  title: 'Access Custom One'
+  description: 'Access Custom One Information.'
+  restrict access: true
