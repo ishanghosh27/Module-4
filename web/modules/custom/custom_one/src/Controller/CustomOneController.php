@@ -2,7 +2,9 @@
 
 namespace Drupal\custom_one\Controller;
 
+use Drupal\Core\Url;
 use Drupal\Core\Controller\ControllerBase;
+use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -45,14 +47,20 @@ class CustomOneController extends ControllerBase {
   }
 
   /**
-   * This method returns a page with a personalized greeting.
+   * This method returns a page with a personalized greeting if logged in. Else,
+   * redirects user to the login page.
    *
    *   @return mixed
    *     The render array for the page.
    */
   public function customOne() {
+    // if (!$this->currentUser->isAuthenticated()) {
+    //   // Redirect anonymous users to the login page.
+    //   $loginUrl = Url::fromRoute('user.login');
+    //   $response = new TrustedRedirectResponse($loginUrl->toString());
+    //   return $response;
+    // }
     $username = $this->currentUser->getAccountName();
-
     return [
       '#title' => 'Custom One Page',
       '#markup' => '<h4>Hello, ' . $username . '</h4>',
