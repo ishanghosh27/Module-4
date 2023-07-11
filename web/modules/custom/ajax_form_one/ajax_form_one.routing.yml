@@ -1,0 +1,8 @@
+generic_form_one.genericOne:
+  path: '/ajax-form-one'
+  defaults:
+    _form: '\Drupal\ajax_form_one\Form\AjaxOne'
+    _title: 'Ajax Form One'
+  requirements:
+    _permission: 'access content'
+    _access: 'TRUE'

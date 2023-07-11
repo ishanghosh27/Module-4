@@ -1,0 +1,14 @@
+uuid: 521a517e-471a-4285-9395-612f1e2097cc
+langcode: en
+status: true
+dependencies: {  }
+_core:
+  default_config_hash: vymHlgJy26BuI5GGj9-IXjwR3dRC5C0tij4BpWJnoqw
+id: feedback
+label: 'Website feedback'
+recipients:
+  - beone@random.com
+reply: ''
+weight: 0
+message: 'Your message has been sent.'
+redirect: ''
