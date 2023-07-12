@@ -54,12 +54,6 @@ class CustomOneController extends ControllerBase {
    *     The render array for the page.
    */
   public function customOne() {
-    // if (!$this->currentUser->isAuthenticated()) {
-    //   // Redirect anonymous users to the login page.
-    //   $loginUrl = Url::fromRoute('user.login');
-    //   $response = new TrustedRedirectResponse($loginUrl->toString());
-    //   return $response;
-    // }
     $username = $this->currentUser->getAccountName();
     return [
       '#title' => 'Custom One Page',
