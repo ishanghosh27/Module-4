@@ -22,7 +22,9 @@
         "drupal/core-recommended": "^10.1",
         "drupal/devel": "^5.1",
         "drupal/libraries": "^4.0",
+        "drupal/mailboxlayer": "^1.4",
         "drupal/mix": "^1.6",
+        "drupal/webform": "^6.2@beta",
         "drupal/webprofiler": "^10.1",
         "drush/drush": "^11.6"
     },

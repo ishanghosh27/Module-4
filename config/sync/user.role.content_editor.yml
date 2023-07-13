@@ -9,6 +9,7 @@ dependencies:
   module:
     - comment
     - contextual
+    - dynamic_routing_one
     - file
     - node
     - path
@@ -27,6 +28,7 @@ permissions:
   - 'access content overview'
   - 'access contextual links'
   - 'access files overview'
+  - 'access the dynamic custom page'
   - 'access toolbar'
   - 'access tour'
   - 'administer url aliases'

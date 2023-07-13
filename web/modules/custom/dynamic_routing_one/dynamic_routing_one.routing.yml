@@ -1,0 +1,9 @@
+dynamic_routing_one.dynamic_route:
+  path: '/dynamic-routing/{para_1}/{para_2}'
+  defaults:
+    _controller: '\Drupal\dynamic_routing_one\Controller\DynamicRouting::content'
+    _title: 'Dynamic Routing One Page'
+  requirements:
+    _permission: 'access the dynamic custom page'
+    _role: 'administrator+content_editor'
+    _parameter: '[a-zA-Z\s]+'
