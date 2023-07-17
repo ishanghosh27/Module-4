@@ -1,20 +1,23 @@
 <?php
 
-  use Drupal\Core\Routing\RouteMatchInterface;
+/**
+ * @file
+ * This module inserts a help paragraph for the module.
+ */
 
-  /**
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
  * Implements hook_help().
  */
-  function loremipsum_help($route_name, RouteMatchInterface $route_match) {
-    switch($route_name) {
-      case 'loremipsum.generate':
-        return t('
-          <h2>Lorem ipsum generator for Drupal.</h2>
-          <h3>Instructions</h3>
-          <p>Lorem ipsum dolor sit amet... <strong>Just kidding!</strong></p>
-          <p>No! Actually, this is it. Sorry not sorry.</p>
-        ');
-    }
+function loremipsum_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    case 'loremipsum.generate':
+      return t('
+        <h2>Lorem ipsum generator for Drupal.</h2>
+        <h3>Instructions</h3>
+        <p>Lorem ipsum dolor sit amet... <strong>Just kidding!</strong></p>
+        <p>No! Actually, this is it. Sorry not sorry.</p>
+      ');
   }
-
-?>
+}

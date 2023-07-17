@@ -6,11 +6,12 @@ namespace Drupal\custom_three\Controller;
  * This class displays the title and a markup of the page.
  */
 class CustomThreeController {
+
   /**
    * This method displays the title and a markup of the page.
    *
-   *   @return array
-   *     Returns the title and a paragraph with a welcome message.
+   * @return array
+   *   Returns the title and a paragraph with a welcome message.
    */
   public function customThree() {
     return [
@@ -20,5 +21,3 @@ class CustomThreeController {
   }
 
 }
-
-?>

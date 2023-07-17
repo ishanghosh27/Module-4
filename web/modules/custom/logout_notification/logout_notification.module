@@ -1,14 +1,17 @@
 <?php
 
-  use Symfony\Component\HttpFoundation\RedirectResponse;
+/**
+ * @file
+ * This module redirects user when the user logs out.
+ */
 
-  /**
-   * Implements hook_user_logout
-   */
-  function logout_notification_user_logout() {
-    // Redirects user to custom page
-    $response = new RedirectResponse('/success_logout');
-    $response->send();
-  }
+use Symfony\Component\HttpFoundation\RedirectResponse;
 
-?>
+/**
+ * Implements hook_user_logout().
+ */
+function logout_notification_user_logout() {
+  // Redirects user to custom page.
+  $response = new RedirectResponse('/success_logout');
+  $response->send();
+}

@@ -6,11 +6,12 @@ namespace Drupal\logout_notification\Controller;
  * This class shows the message when user logs out.
  */
 class LogoutNotificationController {
+
   /**
    * This method displays the message when user logs out.
    *
-   *   @return array
-   *     Returns a paragraph with the message.
+   * @return array
+   *   Returns a paragraph with the message.
    */
   public function notification() {
     return [
@@ -19,5 +20,3 @@ class LogoutNotificationController {
   }
 
 }
-
-?>

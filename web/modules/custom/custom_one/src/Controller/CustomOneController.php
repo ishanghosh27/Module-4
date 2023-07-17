@@ -21,8 +21,8 @@ class CustomOneController extends ControllerBase {
   /**
    * This method initializes the current logged in user.
    *
-   *   @param AccountInterface $current_user
-   *     Stores the object of the AccountInterface class - current logged in user.
+   * @param \Drupal\Core\Session\AccountInterface $current_user
+   *   Stores the object of the AccountInterface class - current logged in user.
    */
   public function __construct(AccountInterface $current_user) {
     $this->currentUser = $current_user;
@@ -36,11 +36,12 @@ class CustomOneController extends ControllerBase {
   }
 
   /**
-   * This method returns a page with a personalized greeting if logged in. Else,
-   * redirects user to the login page.
+   * This method returns a page with a personalized greeting if logged in.
    *
-   *   @return array
-   *     The render array for the page.
+   * Else, Redirects user to the login page.
+   *
+   * @return array
+   *   The render array for the page.
    */
   public function customOne() {
     $username = $this->currentUser->getAccountName();
@@ -51,5 +52,3 @@ class CustomOneController extends ControllerBase {
   }
 
 }
-
-?>

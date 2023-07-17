@@ -1,12 +1,17 @@
 <?php
 
 /**
+ * @file
+ * This module alters the form.
+ */
+
+/**
  * Implements hook_form_FORM_ID_alter().
  */
-function custom_three_form_contact_form_edit_form_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
+function custom_three_form_contact_form_edit_form_alter(&$form) {
   $form['name'] = [
     '#type' => 'textfield',
-    '#title' => 'Name'
+    '#title' => 'Name',
   ];
   return $form;
 }

@@ -10,11 +10,12 @@ class LoremIpsumController {
   /**
    * Displays the title of this page.
    *
-   *   @return array
+   * @return array
+   *   Returns title of the page.
    */
   public function generate() {
     return [
-      '#title' => 'HELLO'
+      '#title' => 'HELLO',
     ];
   }
 
