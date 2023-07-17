@@ -84,9 +84,12 @@ class GenericOne extends FormBase {
       $form_state->setErrorByName('email', $this->t('Invalid Email ID Syntax'));
     }
     // If Email ID doesn't match criteria, display error message.
-    elseif (!in_array(substr($email, strrpos($email, '@') + 1), [
-      'yahoo.com', 'gmail.com', 'outlook.com',
-    ])) {
+    elseif (!in_array(
+          substr($email, strrpos($email, '@') + 1), [
+            'yahoo.com', 'gmail.com', 'outlook.com',
+          ]
+      )
+      ) {
       $form_state->setErrorByName('email', $this->t('Only Public Domains (yahoo.com,gmail.com,outlook.com) Are Allowed'));
     }
     // If Email ID doesn't match criteria, display error message.

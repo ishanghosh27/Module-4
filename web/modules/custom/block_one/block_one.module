@@ -1,0 +1,19 @@
+<?php
+
+/**
+ * @file
+ * This module defines the hooks of my custom module.
+ */
+
+/**
+ * Implements hook_theme().
+ */
+function block_one_theme($existing, $type, $theme, $path) {
+  return [
+    'block_one' => [
+      'variables' => [
+        'content' => NULL,
+      ],
+    ],
+  ];
+}

@@ -1,0 +1,8 @@
+.container-block-one {
+  padding: 0 2em;
+  border: 2px solid yellowgreen;
+}
+
+.container-block-one h2 {
+  color: yellowgreen;
+}
