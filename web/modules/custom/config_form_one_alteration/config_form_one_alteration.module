@@ -1,33 +1,30 @@
 <?php
 
-  /**
-   * Implements config_form_one_alteration_form_FORM_ID_alter().
-   */
-  function config_form_one_alteration_form_config_form_one_admin_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state, $form_id) {
-    $form['color'] = [
-      '#type' => 'color',
-      '#title' => 'Color',
-      '#default_value' => '#ffffff',
-      '#required' => TRUE,
-    ];
-    $form['message']['#title'] = t('(Altered) "Your" Message');
-    $form['fullName']['#title'] = t('Enter YOUR Full Name');
-    $form['actions']['submit']['#submit'][] = 'config_form_one_alter_submit_callback';
-    return $form;
-  }
+/**
+ * @file
+ * This module alters the first config form we created.
+ */
 
-  function config_form_one_alter_submit_callback(&$form, &$form_state) {
-    $color = $form_state->getValue('color');
-    $config = \Drupal::configFactory()->getEditable('config_form_one.admin_settings');
-    $config
-        // ->set('fullName', $form_state->getValue('fullName'))
-        // ->set('phone', $form_state->getValue('phone'))
-        // ->set('email', $form_state->getValue('email'))
-        // ->set('gender', $form_state->getValue('gender'))
-        // ->set('quantity_range', $form_state->getValue('quantity_range'))
-        // ->set('message', $form_state->getValue('message'))
-        ->set('color', $color);
-    $config->save();
-  }
+/**
+ * Implements config_form_one_alteration_form_FORM_ID_alter().
+ */
+function config_form_one_alteration_form_config_form_one_admin_settings_alter(&$form) {
+  $form['color'] = [
+    '#type' => 'color',
+    '#title' => 'Color',
+    '#default_value' => '#ffffff',
+    '#required' => TRUE,
+  ];
+  $form['message']['#title'] = t('(Altered) "Your" Message');
+  $form['fullName']['#title'] = t('Enter YOUR Full Name');
+  $form['actions']['submit']['#submit'][] = 'config_form_one_alter_submit_callback';
+  return $form;
+}
 
-?>
+function config_form_one_alter_submit_callback(&$form, &$form_state) {
+  $color = $form_state->getValue('color');
+  $config = \Drupal::configFactory()->getEditable('config_form_one.admin_settings');
+  $config
+    ->set('color', $color);
+  $config->save();
+}
