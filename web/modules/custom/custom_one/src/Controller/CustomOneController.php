@@ -12,18 +12,17 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class CustomOneController extends ControllerBase {
 
   /**
-   *   @var object
-   *     Stores the current logged in user account.
+   * Stores the current logged in user account.
+   *
+   * @var object
    */
   protected $currentUser;
 
   /**
    * This method initializes the current logged in user.
    *
-   *   @param AccountInterface $current_user
-   *     Stores the object of the AccountInterface class - current logged in user.
-   *
-   *   @return void
+   * @param \Drupal\Core\Session\AccountInterface $current_user
+   *   Stores the object of the AccountInterface class - current logged in user.
    */
   public function __construct(AccountInterface $current_user) {
     $this->currentUser = $current_user;
@@ -32,11 +31,11 @@ class CustomOneController extends ControllerBase {
   /**
    * This static method gets the current logged in user.
    *
-   *   @param ContainerInterface $container
-   *     Stores the object of ContainerInterface class.
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   Stores the object of ContainerInterface class.
    *
-   *   @return mixed
-   *     Returns the current logged in user.
+   * @return mixed
+   *   Returns the current logged in user.
    */
   public static function create(ContainerInterface $container) {
     return new static(
@@ -47,8 +46,8 @@ class CustomOneController extends ControllerBase {
   /**
    * This method returns a page with a personalized greeting.
    *
-   *   @return mixed
-   *     The render array for the page.
+   * @return mixed
+   *   The render array for the page.
    */
   public function customOne() {
     $username = $this->currentUser->getAccountName();
