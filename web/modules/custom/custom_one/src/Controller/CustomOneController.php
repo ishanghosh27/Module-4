@@ -2,9 +2,7 @@
 
 namespace Drupal\custom_one\Controller;
 
-use Drupal\Core\Url;
 use Drupal\Core\Controller\ControllerBase;
-use Drupal\Core\Routing\TrustedRedirectResponse;
 use Drupal\Core\Session\AccountInterface;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 
@@ -14,18 +12,19 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class CustomOneController extends ControllerBase {
 
   /**
-   *   @var object
-   *     Stores the current logged in user account.
+   * Stores the current logged in user account.
+   *
+   * @var object
    */
   protected $currentUser;
 
   /**
    * This method initializes the current logged in user.
    *
-   *   @param AccountInterface $current_user
-   *     Stores the object of the AccountInterface class - current logged in user.
+   * @param \Drupal\Core\Session\AccountInterface $current_user
+   *   Stores the object of the AccountInterface class - current logged in user.
    *
-   *   @return void
+   * @return void
    */
   public function __construct(AccountInterface $current_user) {
     $this->currentUser = $current_user;
@@ -34,11 +33,11 @@ class CustomOneController extends ControllerBase {
   /**
    * This static method gets the current logged in user.
    *
-   *   @param ContainerInterface $container
-   *     Stores the object of ContainerInterface class.
+   * @param \Symfony\Component\DependencyInjection\ContainerInterface $container
+   *   Stores the object of ContainerInterface class.
    *
-   *   @return mixed
-   *     Returns the current logged in user.
+   * @return mixed
+   *   Returns the current logged in user.
    */
   public static function create(ContainerInterface $container) {
     return new static(
@@ -47,19 +46,14 @@ class CustomOneController extends ControllerBase {
   }
 
   /**
-   * This method returns a page with a personalized greeting if logged in. Else,
-   * redirects user to the login page.
+   * This method returns a page with a personalized greeting if logged in.
    *
-   *   @return mixed
-   *     The render array for the page.
+   * Else, redirects user to the login page.
+   *
+   * @return mixed
+   *   The render array for the page.
    */
   public function customOne() {
-    // if (!$this->currentUser->isAuthenticated()) {
-    //   // Redirect anonymous users to the login page.
-    //   $loginUrl = Url::fromRoute('user.login');
-    //   $response = new TrustedRedirectResponse($loginUrl->toString());
-    //   return $response;
-    // }
     $username = $this->currentUser->getAccountName();
     return [
       '#title' => 'Custom One Page',
