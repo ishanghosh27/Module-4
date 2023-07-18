@@ -16,7 +16,9 @@ class BlockOneController extends ControllerBase {
    *   The render array for the page.
    */
   public function blockOne() {
-    return [];
+    return [
+      '#title' => 'Welcome To BackEnd One',
+    ];
   }
 
 }

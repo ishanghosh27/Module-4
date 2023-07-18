@@ -4,9 +4,7 @@ namespace Drupal\block_one\Plugin\Block;
 
 use Drupal\Core\Access\AccessResult;
 use Drupal\Core\Block\BlockBase;
-use Drupal\Core\Plugin\ContainerFactoryPluginInterface;
 use Drupal\Core\Session\AccountInterface;
-use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Provides a block with a simple text.
@@ -17,14 +15,14 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  *   category = "custom"
  * )
  */
-class BlockOne extends BlockBase implements ContainerFactoryPluginInterface {
+class BlockOne extends BlockBase {
 
   /**
    * {@inheritdoc}
    */
   public function blockAccess(AccountInterface $account) {
     $routeMatch = \Drupal::routeMatch();
-    if ($routeMatch->getRouteName() == 'custom-welcome-page') {
+    if ($routeMatch->getRouteName() === 'block_one.blockOne') {
       return AccessResult::allowed();
     }
     else {
@@ -36,21 +34,20 @@ class BlockOne extends BlockBase implements ContainerFactoryPluginInterface {
    * {@inheritdoc}
    */
   public function build() {
+    $current_user = \Drupal::currentUser();
+    $user_name = $current_user->getDisplayName();
+    $user_role = $current_user->getRoles();
+    $main_roles = array_diff($user_role, ['authenticated']);
     return [
       '#theme' => 'block_one',
+      '#username' => $user_name,
+      '#userrole' => implode(', ', $main_roles),
       '#attached' => [
         'library' => [
           'block_one/block-one',
         ],
       ],
     ];
-  }
-
-  /**
-   * {@inheritdoc}
-   */
-  public static function create(ContainerInterface $container, array $configuration, $plugin_id, $plugin_definition) {
-    return new static($configuration, $plugin_id, $plugin_definition);
   }
 
 }
