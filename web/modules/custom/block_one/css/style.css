@@ -1,0 +1,15 @@
+.container-block-one {
+  position: relative;
+  text-align: center;
+}
+
+.container-block-one img {
+  filter: opacity(0.75);
+}
+
+.container-block-one h2 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}

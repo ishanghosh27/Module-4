@@ -1,0 +1,6 @@
+block_one.blockOne:
+  path: '/custom-welcome-page'
+  defaults:
+    _controller: '\Drupal\block_one\Controller\BlockOneController::blockOne'
+  requirements:
+    _permission: 'view block one page'

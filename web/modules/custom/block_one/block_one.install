@@ -1,0 +1,23 @@
+<?php
+
+/**
+ * @file
+ * Defines the installation configuration of the module.
+ */
+
+use Drupal\block\Entity\Block;
+
+/**
+ * Implements hook_install().
+ */
+function block_one_install() {
+  $block = Block::create([
+    'id' => 'block_one',
+    'plugin' => 'block_one',
+    'region' => 'content',
+    'theme' => 'olivero',
+    'status' => TRUE,
+    'weight' => 0,
+  ]);
+  $block->save();
+}

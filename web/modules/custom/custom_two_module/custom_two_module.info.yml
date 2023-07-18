@@ -1,0 +1,5 @@
+name: Custom Two Module
+type: module
+description: This is our second custom module created using &quot;drush generate&quot;
+package: Custom Modules
+core_version_requirement: ^9 || ^10
