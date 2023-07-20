@@ -1,0 +1,8 @@
+logout_notification.notification:
+  path: '/success_logout'
+  defaults:
+    _controller: '\Drupal\logout_notification\Controller\LogoutNotificationController::notification'
+    _title: 'Thank You For Visiting Us. See You Again :)'
+  requirements:
+    _role: 'anonymous'
+
