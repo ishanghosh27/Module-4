@@ -7,6 +7,8 @@ use Drupal\Core\Ajax\CssCommand;
 use Drupal\Core\Ajax\HtmlCommand;
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\custom_validations\CustomValidator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines a config form which uses AJAX to validate and submit data.
@@ -21,10 +23,30 @@ class AjaxOne extends ConfigFormBase {
   protected $response;
 
   /**
-   * Storing the AjaxResponse instance to the class variable.
+   * Stores the validation object.
+   *
+   * @var object
    */
-  public function __construct() {
+  protected $validation;
+
+  /**
+   * Initializes the validation of the form.
+   *
+   * Storing the AjaxResponse instance to the class variable.
+   *
+   * @param \Drupal\custom_validations\CustomValidator $validation
+   *   Stores the object of the CustomValidator class.
+   */
+  public function __construct(CustomValidator $validation) {
+    $this->validation = $validation;
     $this->response = new AjaxResponse();
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('custom_validations.validator'));
   }
 
   /**
@@ -47,48 +69,48 @@ class AjaxOne extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    $config = $this->config('ajax_form_one.admin_settings');
     $form['fullName'] = [
       '#type' => 'textfield',
-      '#title' => t('Full Name'),
+      '#title' => 'Full Name',
       '#suffix' => '<div id="full-name-error"><strong></strong></div>',
       '#attributes' => [
-        'placeholder' => t('Enter Full Name'),
+        'placeholder' => 'Enter Full Name',
       ],
     ];
     $form['phone'] = [
       '#type' => 'tel',
-      '#title' => t('Phone Number'),
+      '#title' => 'Phone Number',
       '#suffix' => '<div id="phone-error"><strong></strong></div>',
       '#attributes' => [
-        'placeholder' => t('Enter Phone Number'),
+        'placeholder' => 'Enter Phone Number',
       ],
     ];
     $form['email'] = [
       '#type' => 'email',
-      '#title' => t('Email ID'),
+      '#title' => 'Email ID',
       '#suffix' => '<div id="email-error"><strong></strong></div>',
       '#attributes' => [
-        'placeholder' => t('Enter Email ID'),
+        'placeholder' => 'Enter Email ID',
       ],
     ];
     $form['gender'] = [
       '#type' => 'radios',
-      '#title' => t('Gender'),
+      '#title' => 'Gender',
       '#suffix' => '<div id="gender-error"><strong></strong></div>',
       '#attributes' => [
-        'placeholder' => t('Select Gender'),
+        'placeholder' => 'Select Gender',
       ],
       '#options' => [
-        'Male' => t('Male'),
-        'Female' => t('Female'),
-        'Other' => t('Other'),
+        'Male' => $this->t('Male'),
+        'Female' => $this->t('Female'),
+        'Other' => $this->t('Other'),
       ],
     ];
     $form['actions']['submit'] = [
       '#type' => 'submit',
       '#value' => $this->t('Submit'),
       '#button_type' => 'primary',
+      '#suffix' => '<div id="submit-success"><strong></strong></div>',
       '#ajax' => [
         'callback' => '::validateAjaxForm',
         'progress' => [
@@ -101,9 +123,9 @@ class AjaxOne extends ConfigFormBase {
   }
 
   /**
-   * This method calls all the individual validation functions and if there are
-   * no errors, calls the function which submits the input data and saves the
-   * configuration.
+   * This method calls all the individual validation functions.
+   *
+   * If there are no errors, calls the function which submits data.
    *
    * @param array $form
    *   Stores the data in the form fields.
@@ -112,111 +134,38 @@ class AjaxOne extends ConfigFormBase {
    *
    * @return object
    *   Calls the individual validation functions and returns the errors, if
-   *     any, else calls the function which submits the input data and saves the
-   *     configuration.
+   *   any, else calls the function which submits the input data and saves the
+   *   configuration.
    */
   public function validateAjaxForm(array &$form, FormStateInterface $form_state) {
-    $this->validateName($form_state);
-    $this->validatePhone($form_state);
-    $this->validateEmail($form_state);
-    $this->validateGender($form_state);
-    // If there are no errors, call the function which submits the input data
-    // and saves the configuration.
+    $errorsName = $this->validation->validateName($form, $form_state);
+    $errorsPhone = $this->validation->validatePhone($form, $form_state);
+    $errorsEmail = $this->validation->validateEmail($form, $form_state);
+    $errorsGender = $this->validation->validateGender($form, $form_state);
+    $this->response->addCommand(new HtmlCommand('#full-name-error strong', ''));
+    $this->response->addCommand(new HtmlCommand('#phone-error strong', ''));
+    $this->response->addCommand(new HtmlCommand('#email-error strong', ''));
+    $this->response->addCommand(new HtmlCommand('#gender-error strong', ''));
+    foreach ($errorsName as $field => $error) {
+      $this->response->addCommand(new HtmlCommand('#' . $field . '-error strong', $error));
+      $this->response->addCommand(new CssCommand('#' . $field . '-error', ['color' => '#DC3545']));
+    }
+    foreach ($errorsPhone as $field => $error) {
+      $this->response->addCommand(new HtmlCommand('#' . $field . '-error strong', $error));
+      $this->response->addCommand(new CssCommand('#' . $field . '-error', ['color' => '#DC3545']));
+    }
+    foreach ($errorsEmail as $field => $error) {
+      $this->response->addCommand(new HtmlCommand('#' . $field . '-error strong', $error));
+      $this->response->addCommand(new CssCommand('#' . $field . '-error', ['color' => '#DC3545']));
+    }
+    foreach ($errorsGender as $field => $error) {
+      $this->response->addCommand(new HtmlCommand('#' . $field . '-error strong', $error));
+      $this->response->addCommand(new CssCommand('#' . $field . '-error', ['color' => '#DC3545']));
+    }
     if (!$form_state->hasAnyErrors()) {
       $this->submitAjaxForm($form, $form_state);
     }
     return $this->response;
-  }
-
-  /**
-   * This method validates the First Name field and returns the error message.
-   *
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Stores the object of FormStateInterface.
-   */
-  public function validateName(FormStateInterface $form_state) {
-    $this->response->addCommand(new HtmlCommand('#full-name-error strong', ''));
-    $name = $form_state->getValue('fullName');
-    // If the full name field is empty, return error message.
-    if (empty($name)) {
-      $this->response->addCommand(new HtmlCommand('#full-name-error strong', 'Full Name Cannot Be Empty'));
-      $this->response->addCommand(new CssCommand('#full-name-error', ['color' => '#DC3545']));
-    }
-    // If the full name field contains anything other than alphabets, return
-    // error message.
-    elseif (!preg_match('/^[a-zA-Z]/', $name)) {
-      $this->response->addCommand(new HtmlCommand('#full-name-error strong', 'Full Name Can Only Containt Alphabets'));
-      $this->response->addCommand(new CssCommand('#full-name-error', ['color' => '#DC3545']));
-    }
-  }
-
-  /**
-   * This method validates the Phone Number field and returns the error message.
-   *
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Stores the object of FormStateInterface.
-   */
-  public function validatePhone(FormStateInterface $form_state) {
-    $this->response->addCommand(new HtmlCommand('#phone-error strong', ''));
-    $phone = $form_state->getValue('phone');
-    // If the phone number field is empty, return error message.
-    if (empty($phone)) {
-      $this->response->addCommand(new HtmlCommand('#phone-error strong', 'Phone Number Cannot Be Empty'));
-      $this->response->addCommand(new CssCommand('#phone-error', ['color' => '#DC3545']));
-    }
-    // If the phone number doesn't match regex pattern, return error message.
-    elseif (!preg_match('/^[6-9]\d{9}$/', $phone)) {
-      $this->response->addCommand(new HtmlCommand('#phone-error strong', 'Please Enter A Valid Indian Phone Number'));
-      $this->response->addCommand(new CssCommand('#phone-error', ['color' => '#DC3545']));
-    }
-  }
-
-  /**
-   * This method validates the Email ID field and returns the error message.
-   *
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Stores the object of FormStateInterface.
-   */
-  public function validateEmail(FormStateInterface $form_state) {
-    $this->response->addCommand(new HtmlCommand('#email-error strong', ''));
-    $email = $form_state->getValue('email');
-    // If email id field is empty, return error message.
-    if (empty($email)) {
-      $this->response->addCommand(new HtmlCommand('#email-error strong', 'Email ID Cannot Be Empty'));
-      $this->response->addCommand(new CssCommand('#email-error', ['color' => '#DC3545']));
-    }
-    // If email id field doesn't match email id syntax, return error message.
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $this->response->addCommand(new HtmlCommand('#email-error strong', 'Invalid Email ID Syntax'));
-      $this->response->addCommand(new CssCommand('#email-error', ['color' => '#DC3545']));
-    }
-    // If email id field doesn't end with the mentioned public domains, return
-    // error message.
-    elseif (!in_array(
-          substr($email, strrpos($email, '@') + 1), [
-            'yahoo.com', 'gmail.com', 'outlook.com', 'innoraft.com',
-          ]
-      )
-      ) {
-      $this->response->addCommand(new HtmlCommand('#email-error strong', 'Only Public Domains (yahoo.com, gmail.com, outlook.com, innoraft.com) Are Allowed'));
-      $this->response->addCommand(new CssCommand('#email-error', ['color' => '#DC3545']));
-    }
-  }
-
-  /**
-   * This method validates the Gender field and returns the error message.
-   *
-   * @param \Drupal\Core\Form\FormStateInterface $form_state
-   *   Stores the object of FormStateInterface.
-   */
-  public function validateGender(FormStateInterface $form_state) {
-    $this->response->addCommand(new HtmlCommand('#gender-error strong', ''));
-    $gender = $form_state->getValue('gender');
-    // If gender field is empty, return error message.
-    if (empty($gender)) {
-      $this->response->addCommand(new HtmlCommand('#gender-error strong', 'Gender Cannot Be Empty'));
-      $this->response->addCommand(new CssCommand('#gender-error', ['color' => '#DC3545']));
-    }
   }
 
   /**

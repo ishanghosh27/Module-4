@@ -4,11 +4,37 @@ namespace Drupal\config_form_one\Form;
 
 use Drupal\Core\Form\ConfigFormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\custom_validations\CustomValidator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * Defines a config form with its build, validation and submission methods.
  */
 class ConfigOne extends ConfigFormBase {
+
+  /**
+   * Stores the validation object.
+   *
+   * @var object
+   */
+  protected $validation;
+
+  /**
+   * This method initializes the validation of the form.
+   *
+   * @param \Drupal\custom_validations\CustomValidator $validation
+   *   Stores the object of the CustomValidator class.
+   */
+  public function __construct(CustomValidator $validation) {
+    $this->validation = $validation;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('custom_validations.validator'));
+  }
 
   /**
    * {@inheritdoc}
@@ -77,42 +103,24 @@ class ConfigOne extends ConfigFormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // Validate Phone Number.
-    if (empty($form_state->getValue('phone'))) {
-      $form_state->setErrorByName('phone', $this->t('Phone Number Cannot Be Empty'));
+    $errorsName = $this->validation->validateName($form, $form_state);
+    $errorsPhone = $this->validation->validatePhone($form, $form_state);
+    $errorsEmail = $this->validation->validateEmail($form, $form_state);
+    foreach ($errorsName as $field => $error) {
+      $form_state->setErrorByName($field, $error);
     }
-    elseif (!preg_match('/^[6-9]\d{9}$/', ($form_state->getValue('phone')))) {
-      $form_state->setErrorByName('phone', $this->t('Please Enter A Valid Indian Phone Number'));
+    foreach ($errorsPhone as $field => $error) {
+      $form_state->setErrorByName($field, $error);
     }
-    // Validate Email ID.
-    $email = $form_state->getValue('email');
-    if (empty($email)) {
-      $form_state->setErrorByName('email', $this->t('Email ID Cannot Be Empty'));
+    foreach ($errorsEmail as $field => $error) {
+      $form_state->setErrorByName($field, $error);
     }
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $form_state->setErrorByName('email', $this->t('Invalid Email ID Syntax'));
-    }
-    elseif (!in_array(
-          substr($email, strrpos($email, '@') + 1),
-          [
-            'yahoo.com',
-            'gmail.com',
-            'outlook.com',
-          ]
-      )
-      ) {
-      $form_state->setErrorByName('email', $this->t('Only Public Domains (yahoo.com,gmail.com,outlook.com) Are Allowed'));
-    }
-    elseif (!preg_match('/\.com$/', $email)) {
-      $form_state->setErrorByName('email', $this->t('Email ID Should End With ".com"'));
-    }
-    parent::validateForm($form, $form_state);
   }
 
   /**
    * {@inheritdoc}
    */
-  public function submitForm(array &$form, FormStateInterface $form_state) {
+  public function submitForm(&$form, FormStateInterface $form_state) {
     $this->config('config_form_one.admin_settings')
       ->set('fullName', $form_state->getValue('fullName'))
       ->set('phone', $form_state->getValue('phone'))

@@ -4,11 +4,48 @@ namespace Drupal\generic_form_one\Form;
 
 use Drupal\Core\Form\FormBase;
 use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Messenger\MessengerInterface;
+use Drupal\custom_validations\CustomValidator;
+use Symfony\Component\DependencyInjection\ContainerInterface;
 
 /**
  * This class creates, validates, and displays a generic form.
  */
 class GenericOne extends FormBase {
+
+  /**
+   * Stores the input data from the form.
+   *
+   * @var object
+   */
+  protected $message;
+
+  /**
+   * Stores the validation object.
+   *
+   * @var object
+   */
+  protected $validation;
+
+  /**
+   * Initializes the validation of the form & displays input data.
+   *
+   * @param \Drupal\Core\Messenger\MessengerInterface $message
+   *   Stores the object of the MessengerInterface class.
+   * @param \Drupal\custom_validations\CustomValidator $validation
+   *   Stores the object of the CustomValidator class.
+   */
+  public function __construct(MessengerInterface $message, CustomValidator $validation) {
+    $this->message = $message;
+    $this->validation = $validation;
+  }
+
+  /**
+   * {@inheritDoc}
+   */
+  public static function create(ContainerInterface $container) {
+    return new static($container->get('messenger'), ($container->get('custom_validations.validator')));
+  }
 
   /**
    * {@inheritdoc}
@@ -21,25 +58,21 @@ class GenericOne extends FormBase {
    * {@inheritdoc}
    */
   public function buildForm(array $form, FormStateInterface $form_state) {
-    // Full Name Field.
     $form['fullName'] = [
       '#type' => 'textfield',
       '#title' => 'Enter Full Name',
       '#required' => TRUE,
     ];
-    // Phone Number Field.
     $form['phone'] = [
       '#type' => 'tel',
       '#title' => 'Enter Phone Number',
       '#required' => TRUE,
     ];
-    // Email ID Field.
     $form['email'] = [
       '#type' => 'email',
       '#title' => 'Enter Email ID',
       '#required' => TRUE,
     ];
-    // Gender Field.
     $form['gender'] = [
       '#type' => 'radios',
       '#title' => 'Select Gender',
@@ -50,7 +83,6 @@ class GenericOne extends FormBase {
       ],
       '#required' => TRUE,
     ];
-    // Submit Button.
     $form['actions']['#type'] = 'actions';
     $form['actions']['submit'] = [
       '#type' => 'submit',
@@ -64,37 +96,21 @@ class GenericOne extends FormBase {
    * {@inheritdoc}
    */
   public function validateForm(array &$form, FormStateInterface $form_state) {
-    // Validate Phone Number.
-    // If the phone number is empty, display error message.
-    if (empty($form_state->getValue('phone'))) {
-      $form_state->setErrorByName('phone', $this->t('Phone Number Cannot Be Empty'));
+    $errorsName = $this->validation->validateName($form, $form_state);
+    $errorsPhone = $this->validation->validatePhone($form, $form_state);
+    $errorsEmail = $this->validation->validateEmail($form, $form_state);
+    $errorsGender = $this->validation->validateGender($form, $form_state);
+    foreach ($errorsName as $field => $error) {
+      $form_state->setErrorByName($field, $error);
     }
-    // If the phone number doesn't match regex pattern, display error message.
-    elseif (!preg_match('/^[6-9]\d{9}$/', ($form_state->getValue('phone')))) {
-      $form_state->setErrorByName('phone', $this->t('Please Enter A Valid Indian Phone Number'));
+    foreach ($errorsPhone as $field => $error) {
+      $form_state->setErrorByName($field, $error);
     }
-    // Validate Email ID.
-    $email = $form_state->getValue('email');
-    // If Email ID is empty, display error message.
-    if (empty($email)) {
-      $form_state->setErrorByName('email', $this->t('Email ID Cannot Be Empty'));
+    foreach ($errorsEmail as $field => $error) {
+      $form_state->setErrorByName($field, $error);
     }
-    // If Email ID doesn't match criteria, display error message.
-    elseif (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
-      $form_state->setErrorByName('email', $this->t('Invalid Email ID Syntax'));
-    }
-    // If Email ID doesn't match criteria, display error message.
-    elseif (!in_array(
-          substr($email, strrpos($email, '@') + 1), [
-            'yahoo.com', 'gmail.com', 'outlook.com',
-          ]
-      )
-      ) {
-      $form_state->setErrorByName('email', $this->t('Only Public Domains (yahoo.com,gmail.com,outlook.com) Are Allowed'));
-    }
-    // If Email ID doesn't match criteria, display error message.
-    elseif (!preg_match('/\.com$/', $email)) {
-      $form_state->setErrorByName('email', $this->t('Email ID Should End With ".com"'));
+    foreach ($errorsGender as $field => $error) {
+      $form_state->setErrorByName($field, $error);
     }
   }
 
@@ -102,9 +118,9 @@ class GenericOne extends FormBase {
    * {@inheritdoc}
    */
   public function submitForm(array &$form, FormStateInterface $form_state) {
-    \Drupal::messenger()->addMessage(t("Generic Form One Submitted. The Entered Values Are As Follows -"));
+    $this->message->addMessage("Generic Form One Submitted. The Entered Values Are As Follows -");
     foreach ($form_state->getValues() as $key => $value) {
-      \Drupal::messenger()->addMessage($key . ': ' . $value);
+      $this->message->addMessage($key . ': ' . $value);
     }
   }
 
