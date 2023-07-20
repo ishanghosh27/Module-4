@@ -1,0 +1,3 @@
+services:
+  custom_validations.validator:
+    class: Drupal\custom_validations\CustomValidator
