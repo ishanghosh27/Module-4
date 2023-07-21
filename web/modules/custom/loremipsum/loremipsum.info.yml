@@ -1,6 +1,0 @@
-name: Lorem Ipsum
-type: module
-description: 'Lorem Ipsum Random Code Generator'
-package: Custom Modules
-core_version_requirement: ^10.0
-configure: loremipsum.form
