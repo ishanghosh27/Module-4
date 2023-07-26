@@ -1,6 +1,7 @@
 _core:
   default_config_hash: R4IF-ClDHXxblLcG0L7MgsLvfBIMAvi_skumNFQwkDc
 module:
+  address: 0
   admin_toolbar: 0
   admin_toolbar_links_access_filter: 0
   admin_toolbar_search: 0
@@ -10,17 +11,18 @@ module:
   big_pipe: 0
   block: 0
   block_content: 0
+  block_one: 0
   breakpoint: 0
   ckeditor5: 0
   comment: 0
   config: 0
   config_form_one: 0
-  config_form_one_alteration: 0
   contact: 0
   contextual: 0
   custom_one: 0
   custom_three: 0
   custom_two_module: 0
+  custom_validations: 0
   datetime: 0
   dblog: 0
   devel: 0
@@ -39,10 +41,8 @@ module:
   libraries: 0
   link: 0
   logout_notification: 0
-  loremipsum: 0
   menu_link_content: 0
   menu_ui: 0
-  mix: 0
   mysql: 0
   node: 0
   options: 0

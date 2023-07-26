@@ -6,6 +6,7 @@ dependencies:
     - core.entity_view_display.comment.comment.default
     - field.field.node.article.body
     - field.field.node.article.comment
+    - field.field.node.article.field_ffd
     - field.field.node.article.field_image
     - field.field.node.article.field_tags
     - image.style.wide
@@ -38,12 +39,19 @@ content:
     third_party_settings: {  }
     weight: 110
     region: content
+  field_ffd:
+    type: basic_string
+    label: above
+    settings: {  }
+    third_party_settings: {  }
+    weight: 111
+    region: content
   field_image:
     type: image
     label: hidden
     settings:
-      image_style: wide
       image_link: ''
+      image_style: wide
       image_loading:
         attribute: lazy
     third_party_settings: {  }

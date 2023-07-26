@@ -1,0 +1,24 @@
+uuid: 268c9c66-e1c2-489f-9d84-c967d1b50dca
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_custom_address
+    - node.type.page
+  module:
+    - address
+id: node.page.field_custom_address
+field_name: field_custom_address
+entity_type: node
+bundle: page
+label: 'Custom Address Field'
+description: ''
+required: true
+translatable: false
+default_value:
+  -
+    street: 'Street Def 1'
+    city: 'City Def 2'
+default_value_callback: ''
+settings: {  }
+field_type: Address

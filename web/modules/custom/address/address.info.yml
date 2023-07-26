@@ -1,0 +1,5 @@
+name: Address
+type: module
+description: Defines a simple address field type.
+package: Custom Modules
+core_version_requirement: ^10.0
