@@ -1,0 +1,8 @@
+ajax_form_one.admin_settings:
+  path: '/admin/config/ajax-form-one'
+  defaults:
+    _form: 'Drupal\ajax_form_one\Form\AjaxOne'
+    _title: 'Ajax Form One'
+  requirements:
+    _permission: 'access content'
+    _access: 'TRUE'

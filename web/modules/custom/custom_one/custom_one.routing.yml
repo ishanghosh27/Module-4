@@ -1,0 +1,7 @@
+custom_one.customOne:
+  path: '/custom-one'
+  defaults:
+    _controller: '\Drupal\custom_one\Controller\CustomOneController::customOne'
+    _title: 'Custom One Page'
+  requirements:
+    _permission: 'view custom one page'
