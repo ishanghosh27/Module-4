@@ -1,0 +1,5 @@
+name: Alter Config Form One
+type: module
+description: 'This alters our first config form.'
+package: Custom Modules
+core_version_requirement: ^10.0

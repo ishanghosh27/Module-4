@@ -1,0 +1,48 @@
+<?php
+
+/**
+ * @file
+ * This module defines the hooks of my custom module.
+ */
+
+use Drupal\Core\Form\FormStateInterface;
+use Drupal\Core\Url;
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function block_one_form_user_login_form_alter(&$form, FormStateInterface $form_state) {
+  $form['#submit'][] = 'block_one_user_login_submit';
+}
+
+/**
+ * Form submission handler for user_login_form().
+ *
+ * Redirects the user to the dashboard after logging in.
+ */
+function block_one_user_login_submit(&$form, FormStateInterface $form_state) {
+  $url = Url::fromRoute('block_one.blockOne');
+  $request = \Drupal::service('request_stack')->getCurrentRequest();
+  if (!$request->request->has('custom-welcome-page')) {
+    $form_state->setRedirectUrl($url);
+  }
+  else {
+    $request->query->set('custom-welcome-page', $request->request->get('custom-welcome-page'));
+  }
+}
+
+/**
+ * Implements hook_theme().
+ */
+function block_one_theme($existing, $type, $theme, $path) {
+  return [
+    'block_one' => [
+      'variables' => [
+        'content' => NULL,
+        'username' => NULL,
+        'userrole' => NULL,
+      ],
+    ],
+  ];
+
+}
