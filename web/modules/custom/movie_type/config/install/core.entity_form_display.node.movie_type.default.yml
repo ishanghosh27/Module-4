@@ -1,0 +1,22 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.field.node.movie_type.body
+    - field.field.node.movie_type.field_movie_image
+    - field.field.node.movie_type.field_movie_price
+    - node.type.movie_type
+id: node.movie_type.default
+targetEntityType: node
+bundle: movie_type
+mode: default
+content:
+  body:
+    label: hidden
+    type: text_textarea_with_summary
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 100
+hidden: {  }
