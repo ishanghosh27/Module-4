@@ -1,0 +1,13 @@
+services:
+  movie_type.uninstall_validator:
+    class: Drupal\movie_type\MovieUninstallValidator
+    tags:
+      - { name: module_install.uninstall_validator }
+    arguments: ['@entity_type.manager', '@string_translation']
+    lazy: true
+
+  movie_budget_event:
+    class: '\Drupal\movie_type\EventSubscriber\BudgetSubscriber'
+    tags:
+      - { name: 'event_subscriber' }
+    arguments: ['@messenger', '@config.factory']

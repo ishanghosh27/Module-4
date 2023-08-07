@@ -104,6 +104,9 @@ class MovieBudgetJudgement extends BlockBase implements ContainerFactoryPluginIn
       if ($node->hasField('field_movie_price') && !$node->get('field_movie_price')->isEmpty()) {
         return AccessResult::allowed();
       }
+      else {
+        return AccessResult::forbidden();
+      }
     }
     else {
       return AccessResult::forbidden();
