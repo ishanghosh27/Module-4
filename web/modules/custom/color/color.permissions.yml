@@ -1,0 +1,4 @@
+color field access:
+  title: 'Allow Color Field Access'
+  description: 'Allows users to add colors via Custom Color Field.'
+  restrict access: true

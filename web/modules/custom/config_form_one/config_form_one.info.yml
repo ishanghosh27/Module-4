@@ -1,0 +1,6 @@
+name: Config Form One
+type: module
+description: 'This is our first config form.'
+package: Custom Modules
+core_version_requirement: ^10.0
+configure: config_form_one.admin_settings

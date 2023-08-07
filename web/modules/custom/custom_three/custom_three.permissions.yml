@@ -1,0 +1,4 @@
+view custom three page:
+  title: 'Access Custom Three Page'
+  description: 'Access Custom Three Information.'
+  restrict access: true

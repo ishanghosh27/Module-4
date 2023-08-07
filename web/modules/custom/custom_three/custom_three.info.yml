@@ -1,0 +1,5 @@
+name: Custom Three Module
+type: module
+description: 'This is our first custom hooks module.'
+package: Custom Modules
+core_version_requirement: ^10.0

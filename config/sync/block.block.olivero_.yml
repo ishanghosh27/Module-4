@@ -1,0 +1,18 @@
+uuid: d74ff347-c029-42d8-8078-31b30d2f4e88
+langcode: en
+status: true
+dependencies:
+  theme:
+    - olivero
+id: olivero_
+theme: olivero
+region: content
+weight: 0
+provider: null
+plugin: block_one
+settings:
+  id: null
+  label: 'Block One'
+  label_display: '0'
+  provider: null
+visibility: {  }

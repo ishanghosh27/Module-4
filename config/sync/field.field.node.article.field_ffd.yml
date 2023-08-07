@@ -1,0 +1,19 @@
+uuid: 069b8a9a-28dd-4d59-9ec1-89a36a4f88d8
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.field_ffd
+    - node.type.article
+id: node.article.field_ffd
+field_name: field_ffd
+entity_type: node
+bundle: article
+label: ffd
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: email

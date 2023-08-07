@@ -1,0 +1,8 @@
+generic_form_one.genericOne:
+  path: '/generic-form-one'
+  defaults:
+    _form: '\Drupal\generic_form_one\Form\GenericOne'
+    _title: 'Generic Form One'
+  requirements:
+    _permission: 'access content'
+    _access: 'TRUE'

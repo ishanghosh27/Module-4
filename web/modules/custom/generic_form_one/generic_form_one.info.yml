@@ -1,0 +1,5 @@
+name: Generic Form One
+type: module
+description: 'This is our first generic form.'
+package: Custom Modules
+core_version_requirement: ^10.0

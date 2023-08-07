@@ -1,0 +1,5 @@
+name: Custom Validations
+type: module
+description: 'This is our custom validation for all the config forms.'
+package: Custom Modules
+core_version_requirement: ^10.0

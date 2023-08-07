@@ -1,0 +1,18 @@
+<?php
+
+/**
+ * @file
+ * This defines all hooks used in this module.
+ */
+
+use Drupal\node\NodeInterface;
+
+/**
+ * Implements hook_ENTITY_TYPE_presave() for nodes.
+ */
+function movie_type_node_presave(NodeInterface $node) {
+  if ($node->getType() === 'movie_type') {
+    $alias = '/movie/' . $node->label();
+    $node->set('path', ['alias' => $alias]);
+  }
+}

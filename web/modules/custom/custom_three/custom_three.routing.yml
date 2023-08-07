@@ -1,0 +1,7 @@
+custom_three.customThree:
+  path: '/custom-three'
+  defaults:
+    _controller: '\Drupal\custom_three\Controller\CustomThreeController::customThree'
+    _title: 'Custom Three Page'
+  requirements:
+    _permission: 'view custom three page'

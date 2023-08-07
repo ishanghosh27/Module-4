@@ -1,0 +1,19 @@
+dynamic_routing_one.dynamic_route:
+  path: '/dynamic-routing/{para_1}/{para_2}'
+  defaults:
+    _controller: '\Drupal\dynamic_routing_one\Controller\DynamicRouting::content'
+    _title: 'Dynamic Routing One Page'
+  requirements:
+    _role: 'administrator+content_editor'
+    _custom_access: '\Drupal\dynamic_routing_one\Access\DynamicAccess::access'
+    _permission: 'access the dynamic custom page'
+    _parameter: '[a-zA-Z\s]+'
+
+dynamic_routing_one.dynamic_route_one:
+  path: '/campaign/value/{data}'
+  defaults:
+    _controller: '\Drupal\dynamic_routing_one\Controller\DynamicRouting::campaign'
+    _title: 'Dynamic Routing One Page Task Two'
+  requirements:
+    _permission: 'access the dynamic custom page'
+    _parameter: '\d+'

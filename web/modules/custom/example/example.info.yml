@@ -1,0 +1,5 @@
+name: Example
+type: module
+description: 'Example Config Entity Type.'
+package: Custom Modules
+core_version_requirement: ^10.0

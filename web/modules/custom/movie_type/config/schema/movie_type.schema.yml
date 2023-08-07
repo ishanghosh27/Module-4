@@ -1,0 +1,17 @@
+movie_type.award:
+  type: config_entity
+  label: 'Movie Award Configuration'
+  mapping:
+    id:
+      type: string
+      label: 'ID'
+    label:
+      type: label
+    uuid:
+      type: string
+    year:
+      type: integer
+      label: 'Year'
+    movie:
+      type: entity_reference
+      label: 'Movie'

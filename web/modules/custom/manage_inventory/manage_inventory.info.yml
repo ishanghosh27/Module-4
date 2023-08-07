@@ -1,0 +1,5 @@
+name: Manage Inventory
+type: module
+description: 'Provides Inventory Entity.'
+package: Custom Modules
+core_version_requirement: ^10.0

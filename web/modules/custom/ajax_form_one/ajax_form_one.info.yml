@@ -1,0 +1,5 @@
+name: Ajax Form One
+type: module
+description: 'This is our first Ajax form.'
+package: Custom Modules
+core_version_requirement: ^10.0
