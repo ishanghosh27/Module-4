@@ -16,3 +16,24 @@ function movie_type_node_presave(NodeInterface $node) {
     $node->set('path', ['alias' => $alias]);
   }
 }
+
+/**
+ * Implements hook_page_attachments().
+ */
+function movie_type_page_attachments(array &$attachments) {
+  $attachments['#attached']['library'][] = 'movie_type/movie-budget';
+}
+
+/**
+ * Implements hook_theme().
+ */
+function movie_type_theme($existing, $type, $theme, $path) {
+  return [
+    'movie_budget' => [
+      'variables' => [
+        'budget' => NULL,
+      ],
+    ],
+  ];
+
+}

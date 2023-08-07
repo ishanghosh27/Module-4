@@ -12,8 +12,20 @@ bundle: movie_type
 mode: default
 content:
   body:
-    label: hidden
+    label: above
     type: text_textarea_with_summary
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_movie_image:
+    label: above
+    type: image_image
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_movie_price:
+    label: above
+    type: number
     weight: 101
     settings: {  }
     third_party_settings: {  }

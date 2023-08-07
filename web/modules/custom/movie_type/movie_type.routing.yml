@@ -37,3 +37,11 @@ entity.award.delete_form:
     _title: 'Delete Movie Award'
   requirements:
     _permission: 'administer site configuration'
+
+menu_api.movie_budget:
+  path: '/admin/movie-budget-judgement'
+  defaults:
+    _form: '\Drupal\movie_type\Form\MovieBudget'
+    _title: 'Movie Budget Judgement'
+  requirements:
+    _role: 'administrator+content_editor'

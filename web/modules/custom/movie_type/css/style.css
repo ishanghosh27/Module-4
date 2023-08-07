@@ -1,0 +1,10 @@
+.container-movie-budget {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toolbar-icon-movie-budget::before {
+  background: url('../images/vintage-camera-on-a-tripod.png');
+  filter: invert(31%) sepia(0%) saturate(0%) hue-rotate(72deg) brightness(100%) contrast(87%);
+}

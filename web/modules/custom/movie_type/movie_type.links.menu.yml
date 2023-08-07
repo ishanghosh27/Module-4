@@ -3,3 +3,14 @@ entity.award.collection:
   parent: system.admin_config_system
   description: 'Configure Movie Award'
   route_name: entity.award.collection
+
+movie.budget:
+  title: 'Movie Budget Judgement'
+  parent: system.admin
+  description: 'A Config Form To Judge Budget Of Movies'
+  route_name: menu_api.movie_budget
+  menu_name: movie-budget
+  weight: 5
+  options:
+    attributes:
+      target: _blank

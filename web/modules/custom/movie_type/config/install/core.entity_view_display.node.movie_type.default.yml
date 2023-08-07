@@ -11,9 +11,21 @@ targetEntityType: node
 bundle: movie_type
 mode: default
 content:
+  field_movie_image:
+    label: hidden
+    type: image
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
   body:
     label: hidden
     type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  field_movie_price:
+    label: inline
+    type: number_decimal
     weight: 101
     settings: {  }
     third_party_settings: {  }
