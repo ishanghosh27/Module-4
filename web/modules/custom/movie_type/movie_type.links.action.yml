@@ -1,0 +1,20 @@
+entity.award.add_form:
+  route_name: 'entity.award.add_form'
+  title: 'Add Movie Award'
+  appears_on:
+    - entity.award.collection
+
+entity.award.canonical:
+  route_name: entity.award.canonical
+  title: 'View Movie Award'
+  weight: 0
+
+entity.award.edit_form:
+  route_name: entity.award.edit_form
+  title: 'Edit Movie Award'
+  weight: 10
+
+entity.award.delete_form:
+  route_name: entity.award.delete_form
+  title: 'Delete Movie Award'
+  weight: 20

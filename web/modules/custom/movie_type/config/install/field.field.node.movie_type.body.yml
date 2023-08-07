@@ -1,0 +1,17 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.body
+    - node.type.movie_type
+id: field.node.movie_type.body
+field_name: body
+entity_type: node
+bundle: movie_type
+label: 'Body Of Movie'
+description: 'Body Of Movie Content'
+required: false
+default_value: { }
+default_value_callback: ''
+settings: { }
+field_type: text_with_summary

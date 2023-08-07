@@ -1,0 +1,5 @@
+services:
+  dynamic_routing_one.route_subscriber:
+    class: Drupal\dynamic_routing_one\Routing\DynamicRoutingRouteSubscriber
+    tags:
+      - { name: event_subscriber }

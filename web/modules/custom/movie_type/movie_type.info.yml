@@ -1,0 +1,6 @@
+name: Movie Type
+type: module
+description: 'Provides Movie Type Content Entity.'
+package: Custom Modules
+core_version_requirement: ^10.0
+configure: entity.award.collection

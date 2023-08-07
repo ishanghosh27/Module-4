@@ -1,0 +1,7 @@
+name: Logout Notification
+type: module
+description: 'This module sends a notification to the user when they log out.'
+package: Custom Modules
+core_version_requirement: ^10.0
+dependencies:
+  - devel:devel_generate

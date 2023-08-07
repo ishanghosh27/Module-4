@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+    - movie_type
+name: 'Movie'
+type: movie_type
+description: 'Use <em>Movie</em> for movie type content.'
+help: 'Movie Type Custom Content'
+new_revision: false
+display_submitted: true
