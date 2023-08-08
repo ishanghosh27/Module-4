@@ -83,23 +83,25 @@ class BudgetSubscriber implements EventSubscriberInterface {
         if ($node->hasField('field_movie_price')) {
           $config = $this->configFactory->get('movie_budget.admin_settings');
           $budget = $config->get('budget');
-          $price = $node->get('field_movie_price');
-          if (!$node->get('field_movie_price')->isEmpty()) {
-            $price_value = $price->getValue()[0]['value'];
-            if ($price_value > $budget) {
-              $message = 'The movie is over budget!';
-            }
-            else {
-              if ($price_value < $budget) {
-                $message = 'The movie is under budget!';
+          if (!empty($budget)) {
+            $price = $node->get('field_movie_price');
+            if (!$node->get('field_movie_price')->isEmpty()) {
+              $price_value = $price->getValue()[0]['value'];
+              if ($price_value > $budget) {
+                $message = 'The movie is over budget!';
               }
               else {
-                if ($price_value = $budget) {
-                  $message = 'The movie is within budget!';
+                if ($price_value < $budget) {
+                  $message = 'The movie is under budget!';
+                }
+                else {
+                  if ($price_value = $budget) {
+                    $message = 'The movie is within budget!';
+                  }
                 }
               }
+              $this->message->addStatus('Event Task - ' . $message);
             }
-            $this->message->addStatus($message);
           }
         }
       }

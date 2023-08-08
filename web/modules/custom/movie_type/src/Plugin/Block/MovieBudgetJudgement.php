@@ -102,7 +102,14 @@ class MovieBudgetJudgement extends BlockBase implements ContainerFactoryPluginIn
     $node = $this->currentRoute->getParameter('node');
     if ($node instanceof NodeInterface && $node->getType() === 'movie_type') {
       if ($node->hasField('field_movie_price') && !$node->get('field_movie_price')->isEmpty()) {
-        return AccessResult::allowed();
+        $config = $this->configFactory->get('movie_budget.admin_settings');
+        $budget = $config->get('budget');
+        if (!empty($budget)) {
+          return AccessResult::allowed();
+        }
+        else {
+          return AccessResult::forbidden();
+        }
       }
       else {
         return AccessResult::forbidden();
