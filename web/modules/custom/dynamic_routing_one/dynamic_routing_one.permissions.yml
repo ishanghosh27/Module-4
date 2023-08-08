@@ -1,0 +1,5 @@
+access the dynamic custom page:
+  title: 'Access Dynamic Routing One Page'
+  description: 'Access Dynamic Routing One Screen.'
+  restrict access: true
+

@@ -1,0 +1,4 @@
+view block one page:
+  title: 'Access Block One'
+  description: 'Access Block One Information.'
+  restrict access: true

@@ -1,0 +1,7 @@
+config_form_one.admin_settings:
+  path: '/admin/config/config-form-one'
+  defaults:
+    _form: '\Drupal\config_form_one\Form\ConfigOne'
+    _title: 'Config Form One Configuration Menu'
+  requirements:
+    _permission: 'administer site configuration'

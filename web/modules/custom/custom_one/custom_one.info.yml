@@ -1,0 +1,5 @@
+name: Custom One Module
+type: module
+description: 'This is our first custom module.'
+package: Custom Modules
+core_version_requirement: ^10.0
