@@ -1,0 +1,12 @@
+langcode: en
+status: true
+dependencies:
+  enforced:
+    module:
+    - dbt_one
+name: 'Events'
+type: dbt_one
+description: 'Use <em>Events</em> for events type content.'
+new_revision: false
+help: ''
+display_submitted: true

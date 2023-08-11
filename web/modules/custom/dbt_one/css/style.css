@@ -1,0 +1,28 @@
+.toolbar-icon-events-dashboard::before {
+  background: url('../images/event.png');
+  filter: invert(31%) sepia(0%) saturate(0%) hue-rotate(72deg) brightness(100%) contrast(87%);
+}
+
+.container-events-dashboard {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+
+.container-events-dashboard table {
+  border: 2px solid black;
+  width: 100%;
+  margin: 2em 0;
+}
+
+.container-events-dashboard th {
+  border: 2px solid black;
+  padding: 0.5rem 1em;
+  background-color: #ddd;
+}
+
+.container-events-dashboard td {
+  border: 2px solid black;
+  padding: 0.5rem 1em;
+}

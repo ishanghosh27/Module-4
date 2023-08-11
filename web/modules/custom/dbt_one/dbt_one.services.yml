@@ -1,0 +1,7 @@
+services:
+  dbt_one.uninstall_validator:
+    class: Drupal\dbt_one\EventsUninstallValidator
+    tags:
+      - { name: module_install.uninstall_validator }
+    arguments: ['@entity_type.manager', '@string_translation']
+    lazy: true

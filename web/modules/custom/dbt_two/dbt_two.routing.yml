@@ -1,0 +1,7 @@
+dbt_two.taxo-db:
+  path: '/tax-db'
+  defaults:
+    _title: 'Get Taxonomy Term Details'
+    _form: '\Drupal\dbt_two\Form\TaxoDashboard'
+  requirements:
+    _permission: 'administer site configuration'

@@ -151,7 +151,8 @@ class MovieBudgetJudgement extends BlockBase implements ContainerFactoryPluginIn
       ],
       '#cache' => [
         'tags' => [
-          'node_list',
+          'node_list:movie_type',
+          'config:movie_budget.admin_settings',
         ],
       ],
     ];

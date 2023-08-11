@@ -1,0 +1,18 @@
+langcode: en
+dependencies:
+  enforced:
+    module:
+      - dbt_one
+  module:
+    - node
+id: node.dbt_one.events_date
+field_name: events_date
+entity_type: node
+type: datetime
+module: core
+settings:
+  datetime_type: date
+cardinality: 1
+translatable: true
+indexes: { }
+persist_with_no_fields: false

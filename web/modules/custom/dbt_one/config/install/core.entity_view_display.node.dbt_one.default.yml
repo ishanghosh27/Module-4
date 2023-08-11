@@ -1,0 +1,31 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - node.type.dbt_one
+id: node.dbt_one.default
+targetEntityType: node
+bundle: dbt_one
+mode: default
+content:
+  events_type:
+    label: inline
+    type: list_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  events_date:
+    label: inline
+    type: datetime_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  body:
+    label: above
+    type: text_default
+    weight: 101
+    settings: {  }
+    third_party_settings: {  }
+  links:
+    weight: 100
+hidden: {  }
