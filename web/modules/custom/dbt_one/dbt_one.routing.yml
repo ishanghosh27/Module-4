@@ -1,0 +1,7 @@
+dbt_one.events_dashboard:
+  path: '/events-dashboard'
+  defaults:
+    _title: 'Events Dashboard'
+    _controller: '\Drupal\dbt_one\Controller\EventsController::eventsDashboard'
+  requirements:
+    _permission: 'administer site configuration'

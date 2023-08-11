@@ -1,0 +1,15 @@
+langcode: en
+dependencies:
+  enforced:
+    module:
+      - movie_type
+  module:
+    - node
+id: node.movie_type.field_movie_image
+field_name: field_movie_image
+entity_type: node
+type: image
+settings: { }
+module: core
+locked: false
+cardinality: 1

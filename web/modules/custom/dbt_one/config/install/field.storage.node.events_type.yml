@@ -1,0 +1,33 @@
+langcode: en
+dependencies:
+  enforced:
+    module:
+      - dbt_one
+  module:
+    - node
+id: node.dbt_one.events_type
+field_name: events_type
+entity_type: node
+settings:
+  settings:
+  allowed_values:
+    -
+      label: birthday
+      value: Birthday
+    -
+      label: anniversary
+      value: Anniversary
+    -
+      label: wedding
+      value: Wedding
+    -
+      label: reception
+      value: Reception
+  allowed_values_function: ''
+module: core
+locked: false
+cardinality: 1
+translatable: true
+indexes: { }
+persist_with_no_fields: false
+type: list_string

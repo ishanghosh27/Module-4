@@ -1,0 +1,19 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - field.storage.node.events_date
+    - node.type.dbt_one
+id: node.dbt_one.events_date
+field_name: events_date
+entity_type: node
+bundle: dbt_one
+label: 'Date Of Event'
+description: 'Select Date Of Event.'
+required: true
+default_value: { }
+default_value_callback: ''
+settings:
+  display_label: true
+  display_description: true
+field_type: datetime

@@ -1,0 +1,10 @@
+events.dashboard:
+  title: 'Events Dashboard'
+  parent: system.admin
+  description: 'A Dashboard To Display Events Details'
+  route_name: dbt_one.events_dashboard
+  menu_name: events-dashboard
+  weight: 5
+  options:
+    attributes:
+      target: _blank

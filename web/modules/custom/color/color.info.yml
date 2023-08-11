@@ -1,0 +1,5 @@
+name: Color Field
+type: module
+description: Defines a Color field type which includes a HEX input, a RGB values input, and a color picker.
+package: Custom Modules
+core_version_requirement: ^10.0

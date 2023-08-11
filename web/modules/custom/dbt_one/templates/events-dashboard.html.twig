@@ -1,0 +1,52 @@
+<div class="container-events-dashboard">
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Number Of Events (Yearly)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in yearly %}
+        <tr>
+          <td>{{ row.event_year }}</td>
+          <td>{{ row.event_year_count }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Year</th>
+        <th>Quarter</th>
+        <th>Number Of Events (Quarterly)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in quarterly %}
+        <tr>
+          <td>{{ row.event_year }}</td>
+          <td>{{ row.event_quarter }}</td>
+          <td>{{ row.event_quarter_count }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+  <table>
+    <thead>
+      <tr>
+        <th>Event Type</th>
+        <th>Number Of Events (Type)</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for row in types %}
+        <tr>
+          <td>{{ row.event_type }}</td>
+          <td>{{ row.event_count }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>

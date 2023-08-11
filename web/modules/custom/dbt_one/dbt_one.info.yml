@@ -1,0 +1,5 @@
+name: Events
+type: module
+description: 'Provides Events Type Content Entity.'
+package: Custom Modules
+core_version_requirement: ^10.0

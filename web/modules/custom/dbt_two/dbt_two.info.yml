@@ -1,0 +1,5 @@
+name: Taxo DB
+type: module
+description: 'Creates Form Page For Database API Task Two.'
+package: Custom Modules
+core_version_requirement: ^10.0
